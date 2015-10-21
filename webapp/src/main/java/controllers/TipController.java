@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import config.MySessionFactoryConfig;
+import config.AppConfig;
 import dao.TipDAO;
 import dao.TipDAOImpl;
 

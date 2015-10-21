@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import config.MySessionFactory;
-import config.MySessionFactoryConfig;
+import config.AppConfig;
 import dao.BettingDAO;
 
 @Controller

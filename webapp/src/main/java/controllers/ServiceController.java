@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import service.ServiceV1;
-import config.MySessionFactoryConfig;
+import config.AppConfig;
 import dao.BettingDAO;
 import dao.BettingDAOImpl;
 import dao.MatchDAO;

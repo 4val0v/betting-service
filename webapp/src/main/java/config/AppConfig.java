@@ -22,7 +22,7 @@ import dao.UserDAO;
 import dao.UserDAOImpl;
 
 @Configuration
-public class MySessionFactoryConfig {
+public class AppConfig {
 
 	@Bean
 	@Scope(BeanDefinition.SCOPE_SINGLETON)
