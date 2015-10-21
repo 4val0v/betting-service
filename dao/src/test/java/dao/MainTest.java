@@ -25,7 +25,7 @@ public class MainTest {
 				addAnnotatedClass(Ticket.class).buildSessionFactory();
 		
 		
-		UserDAO ud = new UserDAOImpl(factory);
+		//UserDAO ud = new UserDAOImpl(factory);
 		TipDAO td = new TipDAOImpl(factory);
 		BettingDAO bd = new BettingDAOImpl(factory);
 		MatchDAO md = new MatchDAOImpl(factory);

@@ -29,9 +29,14 @@ public class ServiceV1 {
 	public Offer findPotentialMatchesForTip(float stake, int tipId)	
 	{	
 		ArrayList<Betting> bettings = (ArrayList)bd.getBettingForTip(tipId);
+		
+		if(bettings.isEmpty())
+		{
+			return null;
+		}
+		
 		Match max1 = new Match(-1, -1, -1, 0, 0, 0);
 		Match max2 = new Match(-1, -1, -1, 0, 0, 0);
-		
 		
 		for(Betting b : bettings)								
 		{
@@ -45,6 +50,7 @@ public class ServiceV1 {
 				max2 = m;
 			}
 		}
+		
 		//**************************************************//
 		//provera maximalnog uloga u kladionici
 		if(max1.getMaxBet() < stake)
@@ -84,9 +90,12 @@ public class ServiceV1 {
 		for(Tip t : tips)
 		{
 			offer = findPotentialMatchesForTip(stake, t.getId());
-			if(offer.getProfit() >= profit)
+			if(offer != null)
 			{
-				offers.add(offer);
+				if(offer.getProfit() >= profit)
+				{
+					offers.add(offer);
+				}
 			}
 		}
 		

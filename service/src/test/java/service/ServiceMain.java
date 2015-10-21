@@ -37,7 +37,7 @@ public class ServiceMain {
 				addAnnotatedClass(Betting.class).addAnnotatedClass(Match.class).addAnnotatedClass(Ticket.class).
 				addAnnotatedClass(Ticket.class).buildSessionFactory();	
 		
-		UserDAO ud = new UserDAOImpl(factory);
+		//UserDAO ud = new UserDAOImpl(factory);
 		TipDAO td = new TipDAOImpl(factory);
 		BettingDAO bd = new BettingDAOImpl(factory);
 		MatchDAO md = new MatchDAOImpl(factory);
@@ -59,7 +59,15 @@ public class ServiceMain {
 		List<Tip> tips = td.getAllTips();
 		Offer offer = null;
 		
-		for(Tip t : tips)
+		offer = service.findPotentialMatchesForTip(500, 4);
+		System.out.println("***************************");
+		System.out.println(offer.getStake1());
+		System.out.println(offer.getStake2());
+		System.out.println(offer.getMatch1().getIdMatch());
+		System.out.println(offer.getMatch2().getIdMatch());
+		System.out.println(offer.getProfit());
+		
+		/*for(Tip t : tips)
 		{
 			offer = service.findPotentialMatchesForTip(1000, t.getId());
 			System.out.println("***************************");
@@ -68,7 +76,7 @@ public class ServiceMain {
 			System.out.println(offer.getMatch1().getIdMatch());
 			System.out.println(offer.getMatch2().getIdMatch());
 			System.out.println(offer.getProfit());
-		}
+		}*/
 		
 		service.findPotentialMatches(500, 10);
 		
