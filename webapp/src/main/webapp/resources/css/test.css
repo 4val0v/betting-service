@@ -1,0 +1,20 @@
+@CHARSET "ISO-8859-1";
+
+body {
+    background-color: #CDF2F2;
+}
+
+.cont {
+	max-height : 700px;
+	min-height : 700px;
+	max-width : 800px;
+	overflow : scroll;
+	overflow-x: hidden;
+	overflow-y: auto;
+	margin:0 auto;
+}
+
+.search-form {
+    display:table;/* shrinks to fit content */
+    margin:auto;
+}
