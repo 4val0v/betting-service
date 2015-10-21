@@ -42,29 +42,6 @@ public class RegisterController {
 		
 		return resp;
 		
-		/*if(!type.equals("user") && !type.equals("admin"))
-		{
-			return "";
-		}
-		
-		if(username == null || password == null || type == "")
-		{
-			return "fail";
-		}
-		
-		User user = new User(username, password, type);
-		if(dao.addUser(user))
-		{
-			HttpSession s = request.getSession();
-			s.setAttribute("user", user);
-			
-			return "success";
-		}
-		else
-		{
-			return "fail";
-		}*/
-		
 	}
 	
 	

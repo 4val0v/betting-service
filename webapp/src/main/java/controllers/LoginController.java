@@ -45,25 +45,6 @@ public class LoginController {
 			return "success";
 		}
 		
-		/*User u = dao.getUserByUsername(username);
-		if(u != null)
-		{
-			if(password.equals(u.getPassword()))
-			{
-				HttpSession s = request.getSession();
-				s.setAttribute("user", u);
-				
-				return "success";
-			}
-			else
-			{
-				return "passwordfail";
-			}
-		}
-		else
-		{
-			return "usernamefail";
-		}*/
 	}
 	
 }

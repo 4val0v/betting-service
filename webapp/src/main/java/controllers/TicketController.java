@@ -5,10 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import model.Match;
-import model.MatchTicket;
 import model.Offer;
-import model.Ticket;
 import model.User;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -19,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import service.ServiceBet;
 import dao.BettingDAO;
 import dao.MatchTicketDAO;
 import dao.TicketDAO;
@@ -114,58 +112,24 @@ public class TicketController {
 			return "";
 		}	
 		
+		ServiceBet service = new ServiceBet(dao, mtd);
+		
 		try {
-			String user = u.getUsername();
 			
+			String user = u.getUsername();
 			Offer offer = mapper.readValue(data, Offer.class);
 			
-			Match m1 = offer.getMatch1();
-			Match m2 = offer.getMatch2();
+			String resp = service.bet(user, offer);
 			
-			Ticket t1 = new Ticket();
-			Ticket t2 = new Ticket();
+			System.out.println(resp);
+			return resp;
 			
-			t1.setIdUser(user);
-			t2.setIdUser(user);
-			t1.setIdBetting(m1.getIdBetting());
-			t2.setIdBetting(m2.getIdBetting());
-			t1.setId(0);
-			t2.setId(0);
-			t1.setStake(offer.getStake1());
-			t2.setStake(offer.getStake2());
-			
-			float profit1 = offer.getStake1()*m1.getOddsHome();
-			float profit2 = offer.getStake2()*m2.getOddsAway();
-			
-			t1.setOutcome(profit1);
-			t2.setOutcome(profit2);
-			
-			int tid1 = dao.addTicket(t1);
-			int tid2 = dao.addTicket(t2);
-			
-			MatchTicket mt1 = new MatchTicket();
-			MatchTicket mt2 = new MatchTicket();
-			
-			mt1.setId(0);
-			mt2.setId(0);
-			mt1.setGuess(1);
-			mt2.setGuess(2);
-			mt1.setMatch_id(m1.getIdMatch());
-			mt2.setMatch_id(m2.getIdMatch());
-			mt1.setTicket_id(tid1);
-			mt2.setTicket_id(tid2);
-			
-			int mtid1 = mtd.addMatchTicket(mt1);
-			int mtid2 = mtd.addMatchTicket(mt2);
-			
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch(IOException e)
+		{
 			e.printStackTrace();
 			return "oops";
 		}
 		
-		return "added";
 	}
 	
 	@RequestMapping(value = "/tickets/mix")

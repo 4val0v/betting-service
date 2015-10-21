@@ -31,10 +31,10 @@
 						data : "offer=" + encodeURIComponent(offer)
 	
 				}).success(function(data) { 
-					
-					if(data == "added")
+					window.alert(data);
+					if(data == "success")
 					{
-						
+						window.alert("Ticket played");
 					}
 					else
 					{
@@ -48,7 +48,7 @@
 			{
 				if(valid)
 				{
-					if($scope.stake < 0 || $scope.profit < 0)
+					if($scope.stake <= 0 || $scope.profit <= 0)
 					{
 						$scope.errorMessage = "Stake and profit must be positive numbers";
 					}
