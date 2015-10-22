@@ -60,5 +60,20 @@ public class FindPotentialMatchTest {
 		
 		return bettings;
 	}
+	
+	@Test
+	public void testFindingPotentialMatchesFail()
+	{
+		when(bd.getBettingForTip(4)).thenReturn(returnBettings());
+		when(md.getMatchForBetting(4, 2)).thenReturn(new Match(4, 4, 2, 1.6f, 3.0f, 1000.0f));
+		when(md.getMatchForBetting(4, 4)).thenReturn(new Match(8, 4, 4, 2.5f, 1.5f, 500));
+		
+		Offer offer = service.findPotentialMatchesForTip(200, 4);
+		
+		assertEquals(109.0, offer.getStake1(), 0.001);
+		assertEquals(91.0, offer.getStake2(), 0.001);
+		assertEquals(80.7272, offer.getProfit(), 0.001);
+		
+	}
 
 }

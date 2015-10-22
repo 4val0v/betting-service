@@ -28,9 +28,6 @@ public class ServiceBettingImpl implements ServiceBetting{
 	public Betting getBettingByName(String name) {
 		// TODO Auto-generated method stub
 		return dao.getBettingByName(name);
-	}
-	
-	
-	
+	}	
 	
 }
