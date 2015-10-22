@@ -1,7 +1,6 @@
 package service;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ import model.Offer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -24,7 +24,8 @@ import dao.TipDAO;
 @RunWith(MockitoJUnitRunner.class)
 public class FindPotentialMatchTest {
 	
-	public ServiceV1 service;
+	@InjectMocks
+	public ServiceCalculateImpl service = new ServiceCalculateImpl();
 	
 	@Mock
 	BettingDAO bd;
@@ -34,11 +35,6 @@ public class FindPotentialMatchTest {
 	
 	@Mock
 	MatchDAO md;
-	
-	@Before  
-    public void setUp() {  
-       service = new ServiceV1(bd, md, td); 
-    }  
 	
 	@Test
 	public void testFindingPotentialMatches()
@@ -64,7 +60,5 @@ public class FindPotentialMatchTest {
 		
 		return bettings;
 	}
-	
-	
 
 }

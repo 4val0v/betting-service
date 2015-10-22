@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import model.User;
@@ -9,12 +8,17 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository("UserDAO")
 public class UserDAOImpl implements UserDAO{
 
+	@Autowired
 	private SessionFactory factory;
 	
-	public UserDAOImpl(SessionFactory factory){ this.factory = factory; }
+	//public UserDAOImpl(SessionFactory factory){ this.factory = factory; }
+	public UserDAOImpl(){}
 	
 	@Override
 	public boolean addUser(User u)

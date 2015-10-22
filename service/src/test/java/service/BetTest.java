@@ -11,6 +11,7 @@ import model.Ticket;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -20,19 +21,14 @@ import dao.TicketDAO;
 @RunWith(MockitoJUnitRunner.class)
 public class BetTest {
 
-	ServiceBet service;
+	@InjectMocks
+	ServiceBet service = new ServiceBetImpl();
 	
 	@Mock
 	TicketDAO td;
 	
 	@Mock
 	MatchTicketDAO mtd;
-	
-	@Before
-	public void setUp()
-	{
-		service = new ServiceBet(td, mtd);
-	}
 	
 	@Test
 	public void testBet()

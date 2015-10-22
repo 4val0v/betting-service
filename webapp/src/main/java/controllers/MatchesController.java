@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import service.ServiceMatches;
 import dao.MatchDAO;
 
 @Controller
 public class MatchesController {
 
 	@Autowired
-	MatchDAO dao;
+	ServiceMatches service;
 	
 	@RequestMapping(value = "/matchesforbetting", method = RequestMethod.GET)
 	public @ResponseBody String getMatchesFor(@RequestParam(value = "id", required = true)int idBet)
@@ -26,7 +27,7 @@ public class MatchesController {
 		String matches = "";
 		
 		try {
-			matches = mapper.writeValueAsString(dao.getMatchesForBetting(idBet));
+			matches = mapper.writeValueAsString(service.getMatchesForBetting(idBet));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

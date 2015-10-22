@@ -16,13 +16,8 @@ import dao.MatchDAO;
 import dao.MatchDAOImpl;
 
 public class MatchDaoTest {
-
-	SessionFactory factory = new AnnotationConfiguration().configure().addAnnotatedClass(User.class)
-			.addAnnotatedClass(Tip.class).addAnnotatedClass(MatchTicket.class).
-			addAnnotatedClass(Betting.class).addAnnotatedClass(Match.class).addAnnotatedClass(Ticket.class).
-			addAnnotatedClass(Ticket.class).buildSessionFactory();
 	
-	MatchDAO dao = new MatchDAOImpl(factory);
+	MatchDAO dao = new MatchDAOImpl();
 	Match m = dao.getMatchById(7);
 	
 	int tip_id = 6;
@@ -38,8 +33,7 @@ public class MatchDaoTest {
 		assertEquals(bet_id, m.getIdBetting());
 		assertEquals(odds_home, m.getOddsHome(), 0.0001);
 		assertEquals(odds_away, m.getOddsAway(), 0.0001);
-		assertEquals(max_bet, m.getMaxBet(), 0.0001);
-		
+		assertEquals(max_bet, m.getMaxBet(), 0.0001);	
 	}
 	
 }

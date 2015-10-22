@@ -3,20 +3,23 @@ package dao;
 import java.util.List;
 
 import model.Ticket;
-import model.Tip;
-import model.User;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository("TicketDAO")
 public class TicketDAOImpl implements TicketDAO{
 
+	@Autowired
 	private SessionFactory factory;
 	
-	public TicketDAOImpl(SessionFactory factory) { this.factory = factory; }
+	//public TicketDAOImpl(SessionFactory factory) { this.factory = factory; }
+	public TicketDAOImpl(){}
 	
 	@Override
 	public int addTicket(Ticket ticket) {

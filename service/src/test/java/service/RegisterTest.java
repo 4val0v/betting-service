@@ -1,13 +1,14 @@
 package service;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
-import static org.mockito.Matchers.*;
 import model.User;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -16,15 +17,11 @@ import dao.UserDAO;
 @RunWith(MockitoJUnitRunner.class)
 public class RegisterTest {
 
-	ServiceRegister service;
+	@InjectMocks
+	ServiceRegister service = new ServiceRegisterImpl();
 	
 	@Mock
 	UserDAO dao;
-	
-	@Before  
-    public void setUp() {  
-       service = new ServiceRegister(dao); 
-    } 
 	
 	@Test
 	public void testRegister()

@@ -7,23 +7,60 @@ import model.Betting;
 import model.Match;
 import model.Offer;
 import model.Tip;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import dao.BettingDAO;
 import dao.MatchDAO;
 import dao.TipDAO;
 
-public class ServiceV1 {
+@Service
+public class ServiceCalculateImpl implements ServiceCalculate{
 
+	@Autowired
 	private BettingDAO bd;
+	@Autowired
 	private MatchDAO md;
+	@Autowired
 	private TipDAO td;
 	
-	public ServiceV1() {}
+	public ServiceCalculateImpl() {}
 	
-	public ServiceV1(BettingDAO bd, MatchDAO md, TipDAO td)
+	public ServiceCalculateImpl(BettingDAO bd, MatchDAO md, TipDAO td)
 	{
 		this.bd = bd;
 		this.md = md;
 		this.td = td;
+	}
+	
+	@Override
+	public ArrayList<Offer> findPotentialMatches(float stake, float profit)
+	{
+		List<Tip> tips = td.getAllTips();
+		ArrayList<Offer> offers = new ArrayList<Offer>();
+		Offer offer = null;
+		
+		for(Tip t : tips)
+		{
+			offer = findPotentialMatchesForTip(stake, t.getId());
+			if(offer != null)
+			{
+				if(offer.getProfit() >= profit)
+				{
+					offers.add(offer);
+				}
+			}
+		}
+		
+		if(offers == null || offers.size() == 0)
+		{
+			return offers;
+		}
+		
+		sortPotentialMatches(offers, 0, offers.size() - 1);
+		
+		return offers;
 	}
 	
 	public Offer findPotentialMatchesForTip(float stake, int tipId)	
@@ -79,34 +116,6 @@ public class ServiceV1 {
 		stake2 = (int)(stake2 + 0.5);
 		
 		return new Offer(stake1, stake2, profit, max1, max2);
-	}
-	
-	public ArrayList<Offer> findPotentialMatches(float stake, float profit)
-	{
-		List<Tip> tips = td.getAllTips();
-		ArrayList<Offer> offers = new ArrayList<Offer>();
-		Offer offer = null;
-		
-		for(Tip t : tips)
-		{
-			offer = findPotentialMatchesForTip(stake, t.getId());
-			if(offer != null)
-			{
-				if(offer.getProfit() >= profit)
-				{
-					offers.add(offer);
-				}
-			}
-		}
-		
-		if(offers == null || offers.size() == 0)
-		{
-			return offers;
-		}
-		
-		sortPotentialMatches(offers, 0, offers.size() - 1);
-		
-		return offers;
 	}
 	
 	public void sortPotentialMatches(ArrayList<Offer> offers, int lower, int higher)

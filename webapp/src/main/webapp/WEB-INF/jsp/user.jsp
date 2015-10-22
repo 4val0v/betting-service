@@ -18,7 +18,7 @@
 <body ng-controller = "ctrl">
 	<div class="container">
 		<div class="page-header">
-			<h1>Title</h1>
+			<h1>${user.username }</h1>
     	
     		<ul class="nav navbar-nav">
        	 		<li><a href="#" ng-click = "switchHome()">Home</a></li>

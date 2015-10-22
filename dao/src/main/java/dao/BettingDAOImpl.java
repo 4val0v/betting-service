@@ -11,13 +11,18 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository("BettingDAO")
 public class BettingDAOImpl implements BettingDAO{
 
+	@Autowired
 	private SessionFactory factory;
 	
-	public BettingDAOImpl(SessionFactory factory) { this.factory = factory; }
-
+	//public BettingDAOImpl(SessionFactory factory) { this.factory = factory; }
+	public BettingDAOImpl() {}
+	
 	@Override
 	public boolean addBetting(Betting b) {
 		// TODO Auto-generated method stub

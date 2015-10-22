@@ -18,9 +18,7 @@ import dao.UserDAO;
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
-	
-	@Autowired
-	UserDAO dao;
+
 	@Autowired
 	ServiceRegister service;
 	

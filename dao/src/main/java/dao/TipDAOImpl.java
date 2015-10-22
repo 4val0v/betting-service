@@ -3,7 +3,6 @@ package dao;
 import java.util.Iterator;
 import java.util.List;
 
-import model.Betting;
 import model.Tip;
 
 import org.hibernate.HibernateException;
@@ -11,13 +10,18 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository("TipDAO")
 public class TipDAOImpl implements TipDAO{
 
+	@Autowired
 	private SessionFactory factory;
 	
-	public TipDAOImpl(SessionFactory factory) { this.factory = factory; }
-
+	//public TipDAOImpl(SessionFactory factory) { this.factory = factory; }
+	public TipDAOImpl() {}
+	
 	@Override
 	public Tip getTipById(int id) {
 		// TODO Auto-generated method stub

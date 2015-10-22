@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import model.Betting;
 import model.Offer;
 import model.User;
 
@@ -17,22 +18,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import service.ServiceBet;
-import dao.BettingDAO;
+import service.ServiceBetting;
+import service.ServiceTickets;
+import service.ServiceUser;
 import dao.MatchTicketDAO;
-import dao.TicketDAO;
 import dao.UserDAO;
 
 @Controller
 public class TicketController {
 
 	@Autowired
-	TicketDAO dao;
+	ServiceBet serviceBet;
 	@Autowired
-	BettingDAO bd;
+	ServiceTickets serviceTicket;
 	@Autowired
-	MatchTicketDAO mtd;
+	ServiceBetting serviceBetting;
 	@Autowired
-	UserDAO ud;
+	ServiceUser serviceUser;
+	
+
 	
 	@RequestMapping(value = "/tickets/all", method = RequestMethod.GET)
 	public @ResponseBody String getAllTickets()
@@ -41,7 +45,7 @@ public class TicketController {
 		String resp = "";
 		
 		try {
-			resp = mapper.writeValueAsString(dao.getAllTickets());
+			resp = mapper.writeValueAsString(serviceTicket.getAllTickets());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,12 +63,13 @@ public class TicketController {
 		String resp = "";
 
 		try {
-			if(bd.getBettingByName(name) == null)
+			Betting b = serviceBetting.getBettingByName(name);
+			if(b == null)
 			{
 				return "{\"message\":\"Betting doesn't exist\"}";
 			}
-			int id = bd.getBettingByName(name).getId();
-			resp = mapper.writeValueAsString(dao.getAllTicketsForBetting(id));
+			int id = b.getId();
+			resp = mapper.writeValueAsString(serviceTicket.getAllTicketsForBetting(id));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,11 +90,11 @@ public class TicketController {
 		String resp = "";
 		
 		try{
-			if(ud.getUserByUsername(user) == null)
+			if(serviceUser.getUserByUsername(user) == null)
 			{
 				return "{\"message\":\"User doesn't exist\"}";
 			}
-			resp = mapper.writeValueAsString(dao.getAllTicketsForUser(user));
+			resp = mapper.writeValueAsString(serviceTicket.getAllTicketsForUser(user));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -109,17 +114,15 @@ public class TicketController {
 		
 		if(u == null)
 		{
-			return "";
+			return "oops";
 		}	
-		
-		ServiceBet service = new ServiceBet(dao, mtd);
 		
 		try {
 			
 			String user = u.getUsername();
 			Offer offer = mapper.readValue(data, Offer.class);
 			
-			String resp = service.bet(user, offer);
+			String resp = serviceBet.bet(user, offer);
 			
 			System.out.println(resp);
 			return resp;
@@ -140,17 +143,19 @@ public class TicketController {
 		String resp = "";
 
 		try {
-			if(ud.getUserByUsername(user) == null)
+			Betting b = serviceBetting.getBettingByName(betting);
+			
+			if(serviceUser.getUserByUsername(user) == null)
 			{
 				return "{\"status\":\"error\",\"message\":\"User doesn't exist\"}";
 			}
-			if(bd.getBettingByName(betting) == null)
+			if(b == null)
 			{
 				return "{\"status\":\"error\",\"message\":\"Betting doesn't exist\"}";
 			}
 		
-			int id = bd.getBettingByName(betting).getId();
-			resp = mapper.writeValueAsString(dao.getAllTicketsForUserAndBetting(user, id));
+			int id = b.getId();
+			resp = mapper.writeValueAsString(serviceTicket.getAllTicketsForUserAndBetting(user, id));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

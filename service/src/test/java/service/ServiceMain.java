@@ -32,16 +32,16 @@ public class ServiceMain {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		SessionFactory factory = new AnnotationConfiguration().configure().addAnnotatedClass(User.class)
+		/*SessionFactory factory = new AnnotationConfiguration().configure().addAnnotatedClass(User.class)
 				.addAnnotatedClass(Tip.class).addAnnotatedClass(MatchTicket.class).
 				addAnnotatedClass(Betting.class).addAnnotatedClass(Match.class).addAnnotatedClass(Ticket.class).
 				addAnnotatedClass(Ticket.class).buildSessionFactory();	
 		
 		//UserDAO ud = new UserDAOImpl(factory);
-		TipDAO td = new TipDAOImpl(factory);
+		//TipDAO td = new TipDAOImpl(factory);
 		BettingDAO bd = new BettingDAOImpl(factory);
 		MatchDAO md = new MatchDAOImpl(factory);
-		TicketDAO tc = new TicketDAOImpl(factory);
+		//TicketDAO tc = new TicketDAOImpl(factory);
 		MatchTicketDAO mtd = new MatchTicketDAOImpl(factory);
 		
 		
@@ -54,7 +54,7 @@ public class ServiceMain {
 		System.out.println(offer.getStake2());
 		System.out.println(offer.getMatch1().getIdMatch());
 		System.out.println(offer.getMatch2().getIdMatch());
-		System.out.println(offer.getProfit());*/
+		System.out.println(offer.getProfit());
 		
 		List<Tip> tips = td.getAllTips();
 		Offer offer = null;
@@ -67,7 +67,7 @@ public class ServiceMain {
 		System.out.println(offer.getMatch2().getIdMatch());
 		System.out.println(offer.getProfit());
 		
-		/*for(Tip t : tips)
+		for(Tip t : tips)
 		{
 			offer = service.findPotentialMatchesForTip(1000, t.getId());
 			System.out.println("***************************");
@@ -76,11 +76,11 @@ public class ServiceMain {
 			System.out.println(offer.getMatch1().getIdMatch());
 			System.out.println(offer.getMatch2().getIdMatch());
 			System.out.println(offer.getProfit());
-		}*/
+		}
 		
 		service.findPotentialMatches(500, 10);
 		
-		/*ArrayList<Offer> offers = service.findPotentialMatches(1000, 10);
+		ArrayList<Offer> offers = service.findPotentialMatches(1000, 10);
 		for(Offer offer : offers)
 		{
 			System.out.println("***************************");
@@ -89,9 +89,9 @@ public class ServiceMain {
 			System.out.println(offer.getMatch1().getIdMatch());
 			System.out.println(offer.getMatch2().getIdMatch());
 			System.out.println(offer.getProfit());
-		}*/
+		}
 		
-		//Offer offer = service.findPotentialMatchesForTip(500, tipId)
+		//Offer offer = service.findPotentialMatchesForTip(500, tipId)*/
 	}
 
 }

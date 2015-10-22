@@ -4,19 +4,23 @@ import java.util.Iterator;
 import java.util.List;
 
 import model.Match;
-import model.Tip;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository("MatchDAO")
 public class MatchDAOImpl implements MatchDAO{
 
+	@Autowired
 	private SessionFactory factory;
 	
-	public MatchDAOImpl(SessionFactory factory) { this.factory = factory; }
+	//public MatchDAOImpl(SessionFactory factory) { this.factory = factory; }
+	public MatchDAOImpl(){}
 	
 	@Override
 	public Match getMatchById(int id) {
