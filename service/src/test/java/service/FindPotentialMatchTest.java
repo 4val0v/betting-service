@@ -36,7 +36,7 @@ public class FindPotentialMatchTest {
 	@Mock
 	MatchDAO md;
 	
-	@Test
+	/*@Test
 	public void testFindingPotentialMatches()
 	{
 		when(bd.getBettingForTip(4)).thenReturn(returnBettings());
@@ -74,6 +74,6 @@ public class FindPotentialMatchTest {
 		assertEquals(91.0, offer.getStake2(), 0.001);
 		assertEquals(80.7272, offer.getProfit(), 0.001);
 		
-	}
+	}*/
 
 }

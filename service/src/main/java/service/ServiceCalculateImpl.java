@@ -63,7 +63,7 @@ public class ServiceCalculateImpl implements ServiceCalculate{
 		return offers;
 	}
 	
-	public Offer findPotentialMatchesForTip(float stake, int tipId)	
+	private Offer findPotentialMatchesForTip(float stake, int tipId)	
 	{	
 		ArrayList<Betting> bettings = (ArrayList)bd.getBettingForTip(tipId);
 		
@@ -72,12 +72,12 @@ public class ServiceCalculateImpl implements ServiceCalculate{
 			return null;
 		}
 		
-		Match max1 = new Match(-1, -1, -1, 0, 0, 0);
-		Match max2 = new Match(-1, -1, -1, 0, 0, 0);
+		Match max1 = md.getMatchForBetting(tipId, bettings.get(0).getId());  //match for first betting
+		Match max2 = md.getMatchForBetting(tipId, bettings.get(0).getId());
 		
-		for(Betting b : bettings)								
+		for(int i = 1; i < bettings.size(); i++)	//from second to end
 		{
-			Match m = md.getMatchForBetting(tipId, b.getId());
+			Match m = md.getMatchForBetting(tipId, bettings.get(i).getId());
 			if(m.getOddsHome() > max1.getOddsHome())
 			{
 				max1 = m;
@@ -118,7 +118,7 @@ public class ServiceCalculateImpl implements ServiceCalculate{
 		return new Offer(stake1, stake2, profit, max1, max2);
 	}
 	
-	public void sortPotentialMatches(ArrayList<Offer> offers, int lower, int higher)
+	private void sortPotentialMatches(ArrayList<Offer> offers, int lower, int higher)
 	{
 		int i = lower;
 		int j = higher;
