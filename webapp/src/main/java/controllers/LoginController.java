@@ -30,7 +30,7 @@ public class LoginController {
 	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody String login(@RequestParam (value = "username", required = true)String username,
 										@RequestParam (value = "password", required = true)String password,
-										ModelMap map, HttpServletRequest request)
+										HttpServletRequest request)
 	{	
 		User u = service.login(username, password);
 		
