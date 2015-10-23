@@ -31,7 +31,6 @@
 						data : "offer=" + encodeURIComponent(offer)
 	
 				}).success(function(data) { 
-					window.alert(data);
 					if(data == "success")
 					{
 						window.alert("Ticket played");

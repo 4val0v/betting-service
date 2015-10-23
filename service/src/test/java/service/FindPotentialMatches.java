@@ -68,8 +68,7 @@ public class FindPotentialMatches {
 		assertEquals(160, offer2.getStake1(), 0.0001);
 		assertEquals(40, offer2.getStake2(), 0.0001);
 		assertEquals(18.0758, offer2.getProfit(), 0.0001);
-		
-		
+				
 	}
 	
 	@Test

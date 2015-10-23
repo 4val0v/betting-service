@@ -23,7 +23,7 @@ public class RegisterController {
 	ServiceRegister service;
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public @ResponseBody String register(HttpServletRequest request, ModelMap map)
+	public @ResponseBody String register(HttpServletRequest request)
 	{
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");

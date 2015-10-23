@@ -16,12 +16,12 @@ public class TipController {
 
 	@Autowired
 	ServiceTip service;
+	@Autowired
+	ObjectMapper mapper;
 	
 	@RequestMapping(value = "/tips", method = RequestMethod.GET)
 	public @ResponseBody String getAllTips()
 	{
-		
-		ObjectMapper mapper = new ObjectMapper();
 		
 		String resp = "";
 		

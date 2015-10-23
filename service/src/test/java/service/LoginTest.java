@@ -26,11 +26,11 @@ public class LoginTest {
 	@Test
 	public void testLogin()
 	{
-		when(dao.getUserByUsername(anyString())).thenReturn(new User("milan", "milan", "admin"));
+		when(dao.getUserByUsername("milan")).thenReturn(new User("milan", "milan", "admin"));
 		
 		User u = service.login("milan", "milan");
 		
-		assertEquals("milan", u.getUsername());
+		assertEquals("", "milan", u.getUsername());
 		assertEquals("milan", u.getPassword());
 		assertEquals("admin", u.getType());
 	}

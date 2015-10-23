@@ -19,10 +19,13 @@ public class MatchesController {
 	@Autowired
 	ServiceMatches service;
 	
+	@Autowired
+	ObjectMapper mapper;
+	
 	@RequestMapping(value = "/matchesforbetting", method = RequestMethod.GET)
 	public @ResponseBody String getMatchesFor(@RequestParam(value = "id", required = true)int idBet)
 	{
-		ObjectMapper mapper = new ObjectMapper();
+		//ObjectMapper mapper = new ObjectMapper();
 		
 		String matches = "";
 		

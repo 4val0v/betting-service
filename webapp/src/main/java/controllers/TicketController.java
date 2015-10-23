@@ -36,12 +36,25 @@ public class TicketController {
 	@Autowired
 	ServiceUser serviceUser;
 	
+	@Autowired
+	ObjectMapper mapper;
+	
 
 	
 	@RequestMapping(value = "/tickets/all", method = RequestMethod.GET)
-	public @ResponseBody String getAllTickets()
+	public @ResponseBody String getAllTickets(HttpServletRequest request)
 	{	
-		ObjectMapper mapper = new ObjectMapper();
+		User u = (User) request.getSession().getAttribute("user");
+		
+		if(u == null)
+		{
+			return "{}";
+		}
+		if(!u.getType().equals("admin"))
+		{
+			return "{}";
+		}
+		
 		String resp = "";
 		
 		try {
@@ -56,9 +69,18 @@ public class TicketController {
 	}
 	
 	@RequestMapping(value = "/tickets/betting", method = RequestMethod.GET)
-	public @ResponseBody String getTicketsForBetting(@RequestParam(value = "name", required = true)String name)
+	public @ResponseBody String getTicketsForBetting(@RequestParam(value = "name", required = true)String name, HttpServletRequest request)
 	{
-		ObjectMapper mapper = new ObjectMapper();
+		User u = (User) request.getSession().getAttribute("user");
+		
+		if(u == null)
+		{
+			return "{}";
+		}
+		if(!u.getType().equals("admin"))
+		{
+			return "{}";
+		}
 		
 		String resp = "";
 
@@ -83,9 +105,12 @@ public class TicketController {
 	}
 	
 	@RequestMapping(value = "/tickets/user", method = RequestMethod.GET)
-	public @ResponseBody String getTicketsForUser(@RequestParam(value = "user", required = true)String user)
+	public @ResponseBody String getTicketsForUser(@RequestParam(value = "user", required = true)String user, HttpServletRequest request)
 	{
-		ObjectMapper mapper = new ObjectMapper();
+		if(request.getSession().getAttribute("user") == null)
+		{
+			return "{}";
+		}
 		
 		String resp = "";
 		
@@ -107,7 +132,6 @@ public class TicketController {
 	@RequestMapping(value = "/playticket", method = RequestMethod.POST)
 	public @ResponseBody String playTicket(@RequestParam(value = "offer", required = true) String data, HttpServletRequest request)
 	{
-		ObjectMapper mapper = new ObjectMapper();
 		HttpSession s = request.getSession();
 		
 		User u = (User) s.getAttribute("user");
@@ -115,7 +139,11 @@ public class TicketController {
 		if(u == null)
 		{
 			return "oops";
-		}	
+		}
+		if(!u.getType().equals("user"))
+		{
+			return "oops";
+		}
 		
 		try {
 			
@@ -124,7 +152,6 @@ public class TicketController {
 			
 			String resp = serviceBet.bet(user, offer);
 			
-			System.out.println(resp);
 			return resp;
 			
 		} catch(IOException e)
@@ -138,8 +165,6 @@ public class TicketController {
 	@RequestMapping(value = "/tickets/mix")
 	public @ResponseBody String getTickets(@RequestParam(value = "user", required = true)String user, @RequestParam(value = "betting", required = true)String betting)
 	{
-		ObjectMapper mapper = new ObjectMapper();
-		
 		String resp = "";
 
 		try {

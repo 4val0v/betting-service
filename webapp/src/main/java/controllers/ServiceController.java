@@ -3,6 +3,8 @@ package controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import model.Offer;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -22,11 +24,17 @@ public class ServiceController {
 	@Autowired
 	ServiceCalculate service;
 	
+	@Autowired
+	ObjectMapper mapper;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody String find(@RequestParam(value = "stake", required = true)float stake,
-										@RequestParam(value = "profit", required = true)float profit)
+										@RequestParam(value = "profit", required = true)float profit, HttpServletRequest request)
 	{	
-		ObjectMapper mapper = new ObjectMapper();
+		if(request.getSession().getAttribute("user") == null)
+		{
+			return "{}";
+		}
 		
 		ArrayList<Offer> offers = service.findPotentialMatches(stake, profit);
 		

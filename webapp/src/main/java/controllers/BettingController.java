@@ -20,10 +20,13 @@ public class BettingController {
 	@Autowired
 	ServiceBetting service;
 	
+	@Autowired
+	ObjectMapper mapper;
+	
 	@RequestMapping(value = "/bettings", method = RequestMethod.GET)
 	public @ResponseBody String getAllBetings()
 	{		
-		ObjectMapper mapper = new ObjectMapper();
+		//ObjectMapper mapper = new ObjectMapper();
 		
 		String response = "";
 		try {
@@ -44,7 +47,5 @@ public class BettingController {
 		
 		return response;
 	}
-	
-	
 	
 }
