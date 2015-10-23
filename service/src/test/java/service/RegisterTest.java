@@ -1,6 +1,7 @@
 package service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 import model.User;
@@ -28,9 +29,9 @@ public class RegisterTest {
 	{	
 		when(dao.addUser(any(User.class))).thenReturn(true);
 		
-		String resp = service.register("dsad", "dsads", "user");
+		User u = service.register("dsad", "dsads", "user");
 		
-		assertEquals("success", resp);
+		assertNotNull(u);
 		
 	}
 	
@@ -39,9 +40,9 @@ public class RegisterTest {
 	{
 		when(dao.addUser(any(User.class))).thenReturn(false);
 		
-		String resp = service.register("dsad", "dsad", "dsadsa");
+		User u = service.register("dsad", "dsad", "dsadsa");
 		
-		assertEquals("success", resp);
+		assertNotNull(u);
 	}
 	
 	@Test
@@ -49,9 +50,9 @@ public class RegisterTest {
 	{
 		when(dao.addUser(any(User.class))).thenReturn(true);
 		
-		String resp = service.register(null, "dsad", "dsadsa");
+		User u = service.register(null, "dsad", "dsadsa");
 		
-		assertEquals("success", resp);	
+		assertNotNull(u);	
 	}
 	
 	

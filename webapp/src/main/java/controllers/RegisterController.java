@@ -29,17 +29,18 @@ public class RegisterController {
 		String password = request.getParameter("password");
 		String type = request.getParameter("type");
 		
-		String resp = service.register(username, password, type);
+		User user = service.register(username, password, type);
 		
-		if(resp.equals("success"))
+		if(user != null)
 		{
-			User user = new User(username, password, type);
 			HttpSession s = request.getSession();
-			s.setAttribute("user", user);			
+			s.setAttribute("user", user);
+			return "success";
 		}
-		
-		return resp;
-		
+		else
+		{
+			return "fail";
+		}
 	}
 	
 	

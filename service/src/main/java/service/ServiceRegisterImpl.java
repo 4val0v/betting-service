@@ -21,19 +21,23 @@ public class ServiceRegisterImpl implements ServiceRegister{
 	}
 	
 	@Override
-	public String register(String username, String password, String type)
+	public User register(String username, String password, String type)
 	{
+		
 		if((!type.equals("user") && !type.equals("admin")) || (username == null || password == null || type == null))
 		{
-			return "fail";
+			return null;
 		}
-		if(dao.addUser(new User(username, password, type)))
+		
+		User u = new User(username, password, type);
+		
+		if(dao.addUser(u))
 		{
-			return "success";
+			return u;
 		}
 		else
 		{
-			return "fail";
+			return null;
 		}
 	}
 }

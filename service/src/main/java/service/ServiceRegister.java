@@ -1,8 +1,10 @@
 package service;
 
+import model.User;
+
 public interface ServiceRegister {
 
-	public String register(String username, String password, String type);
+	public User register(String username, String password, String type);
 	
 	
 }
