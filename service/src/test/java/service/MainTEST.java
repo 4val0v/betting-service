@@ -16,7 +16,7 @@ public class MainTEST {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-	      ApplicationContext context = 
+	     /* ApplicationContext context = 
 	              new ClassPathXmlApplicationContext("Beans.xml");
 	      
 	      TicketDAO t = (TicketDAO) context.getBean("TicketDAO");
@@ -34,7 +34,7 @@ public class MainTEST {
 	    	  System.out.println(offer.getStake2());
 	    	  System.out.println(offer.getProfit());
 	    	  System.out.println(offer.getMatch1().getTip().getName());
-	      }
+	      }*/
 	      
 		
 	}
