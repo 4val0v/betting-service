@@ -7,15 +7,31 @@ public class Offer {
 	private float profit;			//profit
 	private Match match1;			//mec za 1	
 	private Match match2;			//mec za 2
+	private String betting1;
+	private String betting2;
 	
+	public String getBetting1() {
+		return betting1;
+	}
+	public void setBetting1(String betting1) {
+		this.betting1 = betting1;
+	}
+	public String getBetting2() {
+		return betting2;
+	}
+	public void setBetting2(String betting2) {
+		this.betting2 = betting2;
+	}
 	public Offer() {}
-	public Offer(float stake1, float stake2, float profit, Match match1, Match match2)
+	public Offer(float stake1, float stake2, float profit, Match match1, Match match2, String betting1, String betting2)
 	{
 		this.stake1 = stake1;
 		this.stake2 = stake2;
 		this.profit = profit;
 		this.match1 = match1;
 		this.match2 = match2;
+		this.betting1 = betting1;
+		this.betting2 = betting2;
 	}
 	
 	

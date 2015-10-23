@@ -64,7 +64,7 @@
 				<thead>
 					<tr>
 						<th>Ticket 1</th>
-						<th>{{offer.match1.idBetting}}</th>
+						<th class = "text-right" colspan = "2">{{offer.betting1}}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -81,7 +81,7 @@
 				<thead>
 					<tr>
 						<th>Ticket 2</th>
-						<th>{{offer.match2.idBetting}}</th>
+						<th colspan = "2" class = "text-right">{{offer.betting2}}</th>
 					</tr>
 				</thead>
 				<tbody>
