@@ -1,27 +1,20 @@
 package testdao;
 
 import static org.junit.Assert.assertEquals;
-import model.Betting;
-import model.Match;
-import model.MatchTicket;
-import model.Ticket;
-import model.Tip;
 import model.User;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import dao.UserDAO;
-import dao.UserDAOImpl;
 
 public class UserDaoTest {
 
-	/*SessionFactory factory = new AnnotationConfiguration().configure().addAnnotatedClass(User.class)
-			.addAnnotatedClass(Tip.class).addAnnotatedClass(MatchTicket.class).
-			addAnnotatedClass(Betting.class).addAnnotatedClass(Match.class).addAnnotatedClass(Ticket.class).
-			addAnnotatedClass(Ticket.class).buildSessionFactory();
-	UserDAO dao = new UserDAOImpl(factory);
+	ApplicationContext context = 
+            new ClassPathXmlApplicationContext("Beans.xml");
+	
+	UserDAO dao = (UserDAO) context.getBean("UserDAO");
 	
 	User u = dao.getUserByUsername("milan");
 	
@@ -47,7 +40,7 @@ public class UserDaoTest {
 		assertEquals(fpassword, u.getPassword());
 		System.out.println("@type " + ftype + "=" + u.getType());
 		assertEquals(ftype, u.getType());
-	}*/
+	}
 	
 	
 }

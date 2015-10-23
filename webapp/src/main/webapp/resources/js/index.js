@@ -36,6 +36,10 @@
 						
 					});
 				}
+				else
+				{
+					$scope.errorMessageLogin = "Fill login form";
+				}
 			};
 			
 			$scope.submitRegisterForm = function(valid)
@@ -61,6 +65,10 @@
 						}
 						
 					});
+				}
+				else
+				{
+					$scope.errorMessageRegister = "Fill register form";
 				}
 			};
 			

@@ -1,24 +1,22 @@
 package testdao;
 
 import static org.junit.Assert.assertEquals;
-import model.Betting;
+import static org.junit.Assert.assertNotNull;
 import model.Match;
-import model.MatchTicket;
-import model.Ticket;
-import model.Tip;
-import model.User;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import dao.MatchDAO;
-import dao.MatchDAOImpl;
 
 public class MatchDaoTest {
 	
-	MatchDAO dao = new MatchDAOImpl();
-	Match m = dao.getMatchById(7);
+	ApplicationContext context = 
+            new ClassPathXmlApplicationContext("Beans.xml");
+	
+	MatchDAO dao = (MatchDAO) context.getBean("MatchDAO");
+	
 	
 	int tip_id = 6;
 	int bet_id = 2;
@@ -29,11 +27,21 @@ public class MatchDaoTest {
 	@Test
 	public void getMatchById()
 	{
+		Match m = dao.getMatchById(7);
+		
 		assertEquals(tip_id, m.getIdTip());
 		assertEquals(bet_id, m.getIdBetting());
 		assertEquals(odds_home, m.getOddsHome(), 0.0001);
 		assertEquals(odds_away, m.getOddsAway(), 0.0001);
 		assertEquals(max_bet, m.getMaxBet(), 0.0001);	
+	}
+	
+	@Test
+	public void getMatchByIdFail()
+	{
+		Match m = dao.getMatchById(30);
+		
+		assertNotNull(m);
 	}
 	
 }
