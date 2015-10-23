@@ -8,7 +8,6 @@
 	<modules>
 		<module>model</module>
 		<module>dao</module>
-		<module>testmodule</module>
 		<module>webapp</module>
 		<module>service</module>
 	</modules>

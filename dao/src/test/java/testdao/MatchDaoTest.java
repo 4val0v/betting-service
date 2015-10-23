@@ -2,6 +2,7 @@ package testdao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import model.Match;
 
 import org.junit.Test;
@@ -41,7 +42,7 @@ public class MatchDaoTest {
 	{
 		Match m = dao.getMatchById(30);
 		
-		assertNotNull(m);
+		assertNull(m);
 	}
 	
 }
